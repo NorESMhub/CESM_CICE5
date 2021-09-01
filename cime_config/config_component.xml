@@ -5,10 +5,11 @@
 <entry_id version="3.0">
 
   <description>
-    <desc ice="CICE[%PRES][%CMIP6][%CICE4]">Sea ICE (cice) model version 5</desc>
+    <desc ice="CICE[%PRES][%CMIP6][%NORESM-CMIP6][%CICE4]">Sea ICE (cice) model version 5</desc>
     <desc option="PRES" > :prescribed cice</desc>
     <desc option="CMIP6"> :with modifications appropriate for CMIP6 experiments</desc>
     <desc option="CICE4"> :running with cice4 physics</desc>
+    <desc option="NORESM-CMIP6"> :with NORESM modifications appropriate for CMIP6 experiments</desc>
   </description>
 
   <entry id="COMP_ICE">
@@ -35,7 +36,7 @@
   <entry id="CICE_CONFIG_OPTS">
     <type>char</type>
     <default_value></default_value>
-    <values match="last">
+    <values>
       <value compset="_CICE[_%]"> -phys cice5 </value>
       <value compset="_CICE%[^_]*CICE4"> -phys cice4 </value>
     </values>
@@ -51,18 +52,18 @@
       This is an advanced flag and should only be used by expert users.
     </desc>
   </entry>
-
+  
   <entry id="CICE_NAMELIST_OPTS">
     <type>char</type>
-    <default_value></default_value>
-    <values>
-      <value compset="_CAM4">cam4=.true.</value>
-    </values>
-    <group>run_component_cice</group>
-    <file>env_run.xml</file>
-    <desc>CICE specific namelist settings for -namelist option</desc>
+     <default_value></default_value>
+     <values>
+       <value compset="_CAM4">cam4=.true.</value>
+     </values>
+     <group>run_component_cice</group>
+     <file>env_run.xml</file>
+     <desc>CICE specific namelist settings for -namelist option</desc>
   </entry>
-
+  
   <entry id="CICE_AUTO_DECOMP">
     <type>logical</type>
     <valid_values>true,false</valid_values>
@@ -158,6 +159,8 @@
     <values match="last">
       <value
       compset="_CICE[^_]*%CMIP6">$SRCROOT/components/cice/cime_config/usermods_dirs/cmip6</value>
+      <value
+      compset="_CICE[^_]*%NORESM-CMIP6">$SRCROOT/components/cice/cime_config/usermods_dirs/noresm-cmip6</value>
     </values>
     <group>run_component_cice</group>
     <file>env_case.xml</file>
